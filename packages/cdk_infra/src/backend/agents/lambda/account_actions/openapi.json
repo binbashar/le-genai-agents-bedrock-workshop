@@ -1,0 +1,118 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "AccountActions API",
+        "description": "API for handling account-related actions",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/escalate": {
+            "post": {
+                "operationId": "escalate",
+                "description": "Used to escalate to live agent",
+                "requestBody": {
+                    "description": "Escalation request details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Email address to look up"
+                                    }
+                                },
+                                "required": ["email"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean",
+                                    "description": "Response indicating success or failure"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/password_change": {
+            "post": {
+                "operationId": "password_change",
+                "description": "Used for changing account password",
+                "requestBody": {
+                    "description": "Password change request details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Email address to look up"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "description": "Phone number to verify account information"
+                                    }
+                                },
+                                "required": ["email", "phone"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "description": "Result of password change operation"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

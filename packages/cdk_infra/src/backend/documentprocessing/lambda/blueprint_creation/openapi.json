@@ -1,0 +1,494 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Blueprint Management API",
+    "version": "1.0.0",
+    "description": "API for managing Bedrock Data Automation blueprints"
+  },
+  "paths": {
+    "/blueprints/create": {
+      "post": {
+        "summary": "Create a blueprint",
+        "description": "Creates a new blueprint in Bedrock Data Automation",
+        "operationId": "createBlueprint",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "enum": ["create_blueprints"],
+                    "description": "Operation type"
+                  },
+                  "project_id": {
+                    "type": "string",
+                    "description": "Optional project ID. If not provided, a new project will be created."
+                  },
+                  "project_name": {
+                    "type": "string",
+                    "description": "Name for the new project if project_id is not provided"
+                  },
+                  "project_description": {
+                    "type": "string",
+                    "description": "Description for the new project if project_id is not provided"
+                  }
+                },
+                "required": ["operation"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blueprints successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "project": {
+                      "type": "object",
+                      "properties": {
+                        "projectId": {
+                          "type": "string",
+                          "description": "ID of the project"
+                        },
+                        "projectName": {
+                          "type": "string",
+                          "description": "Name of the project"
+                        },
+                        "created": {
+                          "type": "boolean",
+                          "description": "Whether a new project was created"
+                        }
+                      }
+                    },
+                    "blueprints": {
+                      "type": "array",
+                      "description": "List of created blueprints",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "type": {
+                            "type": "string",
+                            "description": "Type of blueprint"
+                          },
+                          "id": {
+                            "type": "string",
+                            "description": "ID of the created blueprint"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "Name of the blueprint"
+                          },
+                          "status": {
+                            "type": "string",
+                            "description": "Status of creation"
+                          }
+                        }
+                      }
+                    },
+                    "summary": {
+                      "type": "object",
+                      "properties": {
+                        "total": {
+                          "type": "integer",
+                          "description": "Total number of blueprints"
+                        },
+                        "created": {
+                          "type": "integer",
+                          "description": "Number of successfully created blueprints"
+                        },
+                        "failed": {
+                          "type": "integer",
+                          "description": "Number of failed blueprints"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/blueprints/list": {
+      "post": {
+        "summary": "List blueprints",
+        "description": "Lists all available blueprints in Bedrock Data Automation",
+        "operationId": "listBlueprints",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "enum": ["list_blueprints"],
+                    "description": "Operation type"
+                  },
+                  "project_id": {
+                    "type": "string",
+                    "description": "Optional project ID to filter blueprints"
+                  }
+                },
+                "required": ["operation"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blueprints successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/blueprints/get": {
+      "post": {
+        "summary": "Get blueprint",
+        "description": "Gets details of a specific blueprint",
+        "operationId": "getBlueprint",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "enum": ["get_blueprint"],
+                    "description": "Operation type"
+                  },
+                  "blueprintArn": {
+                    "type": "string",
+                    "description": "ARN of the blueprint to retrieve"
+                  }
+                },
+                "required": ["operation", "blueprintArn"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blueprint successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          },
+          "404": {
+            "description": "Blueprint not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/blueprints/delete": {
+      "post": {
+        "summary": "Delete blueprint",
+        "description": "Deletes a specific blueprint",
+        "operationId": "deleteBlueprint",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "enum": ["delete_blueprint"],
+                    "description": "Operation type"
+                  },
+                  "blueprintArn": {
+                    "type": "string",
+                    "description": "ARN of the blueprint to delete"
+                  }
+                },
+                "required": ["operation", "blueprintArn"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blueprint successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          },
+          "404": {
+            "description": "Blueprint not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/blueprints/update": {
+      "post": {
+        "summary": "Update blueprint",
+        "description": "Updates a specific blueprint",
+        "operationId": "updateBlueprint",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "enum": ["update_blueprint"],
+                    "description": "Operation type"
+                  },
+                  "blueprintArn": {
+                    "type": "string",
+                    "description": "ARN of the blueprint to update"
+                  },
+                  "definition": {
+                    "type": "object",
+                    "description": "New blueprint definition (as a JSON object)"
+                  }
+                },
+                "required": ["operation", "blueprintArn", "definition"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blueprint successfully updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          },
+          "404": {
+            "description": "Blueprint not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/blueprints/detect-document-type": {
+      "post": {
+        "summary": "Detect document type",
+        "description": "Detects the type of a document based on its content",
+        "operationId": "detectDocumentType",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "enum": ["detect_document_type"],
+                    "description": "Operation type"
+                  },
+                  "document_data": {
+                    "type": "object",
+                    "description": "Document data to analyze"
+                  }
+                },
+                "required": ["operation", "document_data"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document type successfully detected",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "document_type": {
+                      "type": "string",
+                      "description": "Detected document type"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/blueprints/get-for-document": {
+      "post": {
+        "summary": "Get blueprint for document",
+        "description": "Gets the appropriate blueprint for a document type",
+        "operationId": "getBlueprintForDocument",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "enum": ["get_blueprint_for_document"],
+                    "description": "Operation type"
+                  },
+                  "document_type": {
+                    "type": "string",
+                    "description": "Document type"
+                  },
+                  "document_data": {
+                    "type": "object",
+                    "description": "Document data to analyze if document_type is not provided"
+                  }
+                },
+                "required": ["operation"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blueprint successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "document_type": {
+                      "type": "string",
+                      "description": "Document type"
+                    },
+                    "blueprint": {
+                      "type": "object",
+                      "description": "Blueprint definition"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/blueprints/getByType": {
+      "post": {
+        "summary": "Get blueprint by document type",
+        "description": "Gets details of a blueprint based on its document type, usually inferred from the name",
+        "operationId": "getBlueprintByType",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "operation": {
+                    "type": "string",
+                    "enum": ["GET_BLUEPRINT_BY_TYPE"],
+                    "description": "Operation type"
+                  },
+                  "document_type": {
+                    "type": "string",
+                    "description": "Document type of the blueprint to retrieve (e.g., ein_verification)"
+                  }
+                },
+                "required": ["operation", "document_type"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blueprint successfully retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "flowId": {"type": "string"},
+                    "name": {"type": "string"},
+                    "description": {"type": "string"},
+                    "projectId": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters (e.g., missing document_type)"
+          },
+          "404": {
+            "description": "Blueprint not found for the given document type"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+} 
