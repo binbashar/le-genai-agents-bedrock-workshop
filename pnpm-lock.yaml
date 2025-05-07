@@ -16,22 +16,22 @@ importers:
     dependencies:
       '@aws-cdk/aws-lambda-python-alpha':
         specifier: 2.173.2-alpha.0
-        version: 2.173.2-alpha.0(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)
+        version: 2.173.2-alpha.0(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)
       '@aws/pdk':
         specifier: ^0.25.15
-        version: 0.25.16(@aws-cdk/aws-cognito-identitypool-alpha@2.163.1-alpha.0(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2))(aws-cdk-lib@2.188.0(constructs@10.4.2))(cdk-nag@2.34.23(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2))(constructs@10.4.2)(projen@0.82.8(constructs@10.4.2))
+        version: 0.25.16(@aws-cdk/aws-cognito-identitypool-alpha@2.163.1-alpha.0(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2))(aws-cdk-lib@2.189.1(constructs@10.4.2))(cdk-nag@2.34.23(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2))(constructs@10.4.2)(projen@0.82.8(constructs@10.4.2))
       '@cdklabs/generative-ai-cdk-constructs':
         specifier: ^0.1.287
-        version: 0.1.289(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)
+        version: 0.1.289(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)
       aws-bedrock-data-automation:
         specifier: npm:@cdklabs/generative-ai-cdk-constructs@0.1.299
-        version: '@cdklabs/generative-ai-cdk-constructs@0.1.299(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)'
+        version: '@cdklabs/generative-ai-cdk-constructs@0.1.299(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)'
       aws-cdk-lib:
-        specifier: ^2.187.0
-        version: 2.188.0(constructs@10.4.2)
+        specifier: ^2.189.1
+        version: 2.189.1(constructs@10.4.2)
       cdk-nag:
         specifier: ^2.34.23
-        version: 2.34.23(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)
+        version: 2.34.23(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)
       constructs:
         specifier: ^10.0.0
         version: 10.4.2
@@ -110,7 +110,7 @@ importers:
         version: 1.0.34
       '@langchain/community':
         specifier: ^0.3.3
-        version: 0.3.24(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-bedrock-agent-runtime@3.726.1)(@aws-sdk/client-bedrock-runtime@3.726.1)(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.0.0)(@browserbasehq/stagehand@1.9.0(@playwright/test@1.49.1)(deepmerge@4.3.1)(dotenv@16.4.7)(openai@4.78.1(zod@3.24.1))(zod@3.24.1))(@ibm-cloud/watsonx-ai@1.3.1)(@langchain/core@0.2.36(openai@4.78.1(zod@3.24.1)))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(ibm-cloud-sdk-core@5.1.1)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.0)
+        version: 0.3.24(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-bedrock-agent-runtime@3.726.1)(@aws-sdk/client-bedrock-runtime@3.726.1)(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.5.0)(@browserbasehq/stagehand@1.9.0(@playwright/test@1.49.1)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.78.1(zod@3.24.1))(zod@3.24.1))(@ibm-cloud/watsonx-ai@1.3.1)(@langchain/core@0.2.36(openai@4.78.1(zod@3.24.1)))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(ibm-cloud-sdk-core@5.1.1)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.2)
       '@langchain/core':
         specifier: ^0.2.26
         version: 0.2.36(openai@4.78.1(zod@3.24.1))
@@ -143,7 +143,7 @@ importers:
         version: 11.11.1
       langchain:
         specifier: ^0.2.19
-        version: 0.2.20(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.0.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.0)
+        version: 0.2.20(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.5.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.2)
       marked:
         specifier: ^12.0.2
         version: 12.0.2
@@ -324,8 +324,8 @@ packages:
       xstate:
         optional: true
 
-  '@aws-cdk/asset-awscli-v1@2.2.230':
-    resolution: {integrity: sha512-kUnhKIYu42hqBa6a8x2/7o29ObpJgjYGQy28lZDq9awXyvpR62I2bRxrNKNR3uFUQz3ySuT9JXhGHhuZPdbnFw==}
+  '@aws-cdk/asset-awscli-v1@2.2.235':
+    resolution: {integrity: sha512-CpM9ids39j27Rt25iHP4sX619xb0OW6f8VS4XJbyI27XnQElmoMwtWw1IOAwDhWQEO2OuJwAu5pXfrLTfNaDEg==}
 
   '@aws-cdk/asset-node-proxy-agent-v6@2.1.0':
     resolution: {integrity: sha512-7bY3J8GCVxLupn/kNmpPc5VJz8grx+4RKfnnJiO1LG+uxkZfANZG3RMHhE+qQxxwkyQ9/MfPtTpf748UhR425A==}
@@ -957,8 +957,8 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@browserbasehq/sdk@2.0.0':
-    resolution: {integrity: sha512-BdPlZyn0dpXlL70gNK4acpqWIRB+edo2z0/GalQdWghRq8iQjySd9fVIF3evKH1p2wCYekZJRK6tm29YfXB67g==}
+  '@browserbasehq/sdk@2.5.0':
+    resolution: {integrity: sha512-bcnbYZvm5Ht1nrHUfWDK4crspiTy1ESJYMApsMiOTUnlKOan0ocRD6m7hZH34iSC2c2XWsoryR80cwsYgCBWzQ==}
 
   '@browserbasehq/stagehand@1.9.0':
     resolution: {integrity: sha512-0wIFnwOVnUEgVkPKW0RX7NoOt98qaRJ8+l1m9ppk1f5E03GtefDQTMiQwwT9WQn163bpZT5cOhyA1I3jZNfFeA==}
@@ -1040,8 +1040,8 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
 
-  '@emnapi/runtime@1.3.1':
-    resolution: {integrity: sha512-kEBmG8KyqtxJZv+ygbEim+KCGtIq1fC22Ms3S4ziXmYKm8uyoLX0MHONVKwp+9opg390VaKRNt4a7A9NwmpNhw==}
+  '@emnapi/runtime@1.4.3':
+    resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
 
   '@emotion/hash@0.8.0':
     resolution: {integrity: sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==}
@@ -2870,8 +2870,8 @@ packages:
   '@types/node@18.19.70':
     resolution: {integrity: sha512-RE+K0+KZoEpDUbGGctnGdkrLFwi1eYKTlIHNl2Um98mUkGsm1u2Ff6Ltd0e8DktTtC98uy7rSj+hO8t/QuLoVQ==}
 
-  '@types/node@18.19.71':
-    resolution: {integrity: sha512-evXpcgtZm8FY4jqBSN8+DmOTcVkkvTmAayeo4Wf3m1xAruyVGzGuDh/Fb/WWX2yLItUiho42ozyJjB0dw//Tkw==}
+  '@types/node@18.19.98':
+    resolution: {integrity: sha512-+bP9tunb6pQbV5cV4z9EwCD/811rXGwXXI/cNK+8MIcm7Ufe9GWGoz91ERuC4MAn5Yp/SEWNYulaQdRHFG67iw==}
 
   '@types/node@22.7.9':
     resolution: {integrity: sha512-jrTfRC7FM6nChvU7X2KqcrgquofrWLFDeYC1hKfwNWomVvrn7JIksqf344WN2X/y8xrgqBd2dJATZV4GbatBfg==}
@@ -3001,8 +3001,8 @@ packages:
   aws-amplify@6.12.0:
     resolution: {integrity: sha512-rnIw4+0BdCfXMQgXjmguQOe2aKMVc0RNJEgu8UvGeNsHYhC3yhycPUMjt14bbc42uk8t+7CLT2d6CLOORNxmLQ==}
 
-  aws-cdk-lib@2.188.0:
-    resolution: {integrity: sha512-RiAkyKHUYcpI59IXP6VP1NvO0Ph5vlqIsrz6YE8KPuGfQ0LuE5ob4Ta2ibVs/fvaGyJIZkEPw54hDrytVWrk3g==}
+  aws-cdk-lib@2.189.1:
+    resolution: {integrity: sha512-9JU0yUr2iRTJ1oCPrHyx7hOtBDWyUfyOcdb6arlumJnMcQr2cyAMASY8HuAXHc8Y10ipVp8dRTW+J4/132IIYA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       constructs: ^10.0.0
@@ -3095,6 +3095,9 @@ packages:
 
   buffer@4.9.2:
     resolution: {integrity: sha512-xq+q3SRMOxGivLhBNaUdC64hDTQwejJ+H0T/NB1XMtTVEwNTrfFF3gAxiyW0Bu/xWEGhjVKgUcMhCrUy2+uCWg==}
+
+  buffer@6.0.3:
+    resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
 
   callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
@@ -3294,8 +3297,8 @@ packages:
     peerDependencies:
       valtio: '*'
 
-  detect-libc@2.0.3:
-    resolution: {integrity: sha512-bwy0MGW55bG41VqxxypOsdSdGqLwXPI/focwgTYCFMbdUiBAxLg9CFzG08sz2aqzknwiX7Hkl0bQENjg8iLByw==}
+  detect-libc@2.0.4:
+    resolution: {integrity: sha512-3UDv+G9CsCKO1WKMGw9fwq/SWJYbI0c5Y7LU1AXYoDdbhE2AHQ6N6Nb34sG8Fj7T5APy8qXDCKuuIHd1BR0tVA==}
     engines: {node: '>=8'}
 
   detect-newline@3.1.0:
@@ -3328,8 +3331,8 @@ packages:
   dot-case@3.0.4:
     resolution: {integrity: sha512-Kv5nKlh6yRrdrGvxeJ2e5y2eRUpkUosIW4A2AS38zwSz27zu7ufDwQPi5Jhs3XAlGNetl3bmnGhQsMtkKJnj3w==}
 
-  dotenv@16.4.7:
-    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
+  dotenv@16.5.0:
+    resolution: {integrity: sha512-m/C+AwOAr9/W1UOIZUo232ejMNnJAJtYQjUbHoNTBNTJSvqzzDh7vnrei3o3r3m9blf6ZoDkvcw0VmozNRFJxg==}
     engines: {node: '>=12'}
 
   ecdsa-sig-formatter@1.0.11:
@@ -3387,6 +3390,10 @@ packages:
 
   eventemitter3@4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
+
+  events@3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
+    engines: {node: '>=0.8.x'}
 
   execa@5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
@@ -3814,8 +3821,8 @@ packages:
     resolution: {integrity: sha512-PRp66vJ865SSqOlgqS8hujT5U4AOgMfhrwYIuIhfKaoSCZcirrmASQr8CX7cUg+RMih+hgznrjp99o+W4pJLHQ==}
     engines: {node: '>=12', npm: '>=6'}
 
-  jwa@1.4.1:
-    resolution: {integrity: sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==}
+  jwa@1.4.2:
+    resolution: {integrity: sha512-eeH5JO+21J78qMvTIDdBXidBd6nG2kZjg5Ohz/1fpa28Z4CcsWUzJ1ZZyFq/3z3N17aZy+ZuBoHljASbL1WfOw==}
 
   jws@3.2.2:
     resolution: {integrity: sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==}
@@ -4142,6 +4149,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -4301,6 +4309,10 @@ packages:
   pretty-format@29.7.0:
     resolution: {integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+
+  process@0.11.10:
+    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
+    engines: {node: '>= 0.6.0'}
 
   projen@0.82.8:
     resolution: {integrity: sha512-/YpYZf4g0/pck2tr34a4gpOveCV1xbCfdDT+H4Xq8qQzF0IbcDVsoV1kZXPcyzVWUyqHFT2/ORUeocV+Hka8tQ==}
@@ -4664,12 +4676,12 @@ packages:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
 
-  readable-stream@3.6.2:
-    resolution: {integrity: sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==}
-    engines: {node: '>= 6'}
+  readable-stream@4.7.0:
+    resolution: {integrity: sha512-oIGGmcpTLwPga8Bn6/Z75SVaH1z5dUut2ibSyAMVhmUggWpmDn2dapB0n7f8nwaSiRtepAsfJyfXIO5DCVAODg==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
-  readable-web-to-node-stream@3.0.2:
-    resolution: {integrity: sha512-ePeK6cc1EcKLEhJFt/AebMCLL+GgSKhuygrZ/GLaKZYEecIgIECf4UaUuaByiGtzckwR4ain9VzUh95T1exYGw==}
+  readable-web-to-node-stream@3.0.4:
+    resolution: {integrity: sha512-9nX56alTf5bwXQ3ZDipHJhusu9NTQJ/CVPtb/XHAJCXihZeitfJvIRS4GqQ/mfIoOE3IelHMrpayVrosdHBuLw==}
     engines: {node: '>=8'}
 
   redent@3.0.0:
@@ -4746,6 +4758,11 @@ packages:
 
   semver@7.6.3:
     resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
+    engines: {node: '>=10'}
+    hasBin: true
+
+  semver@7.7.1:
+    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -5010,9 +5027,6 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  util-deprecate@1.0.2:
-    resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
-
   uuid@10.0.0:
     resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
     hasBin: true
@@ -5122,8 +5136,8 @@ packages:
     resolution: {integrity: sha512-7KxauUdBmSdWnmpaGFg+ppNjKF8uNLry8LyzjauQDOVONfFLNKrKvQOxZ/VuTIcS/gge/YNahf5RIIQWTSarlg==}
     engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
 
-  ws@8.18.0:
-    resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
+  ws@8.18.2:
+    resolution: {integrity: sha512-DMricUmwGZUVr++AEAe2uiVM7UoO9MAVZMDu05UQOaUII0lp+zOzLLU4Xqh/JvTqklB1T4uELaaPBKyjE1r4fQ==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -5178,6 +5192,11 @@ packages:
 
   zod-to-json-schema@3.24.1:
     resolution: {integrity: sha512-3h08nf3Vw3Wl3PK+q3ow/lIil81IT2Oa7YpQyUUDsEWbXveMesdfK1xBd2RhCkynwZndAxixji/7SYJJowr62w==}
+    peerDependencies:
+      zod: ^3.24.1
+
+  zod-to-json-schema@3.24.5:
+    resolution: {integrity: sha512-/AuWwMP+YqiPbsJx5D6TfgRTc4kTLjsh5SOcd4bLsfUg2RcEXrFMJl1DGgdHy2aCfsIA/cr/1JM0xcB2GZji8g==}
     peerDependencies:
       zod: ^3.24.1
 
@@ -5244,7 +5263,7 @@ snapshots:
 
   '@anthropic-ai/sdk@0.27.3':
     dependencies:
-      '@types/node': 18.19.71
+      '@types/node': 18.19.98
       '@types/node-fetch': 2.6.12
       abort-controller: 3.0.0
       agentkeepalive: 4.6.0
@@ -5389,18 +5408,18 @@ snapshots:
     optionalDependencies:
       xstate: 4.38.3
 
-  '@aws-cdk/asset-awscli-v1@2.2.230': {}
+  '@aws-cdk/asset-awscli-v1@2.2.235': {}
 
   '@aws-cdk/asset-node-proxy-agent-v6@2.1.0': {}
 
-  '@aws-cdk/aws-cognito-identitypool-alpha@2.163.1-alpha.0(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)':
+  '@aws-cdk/aws-cognito-identitypool-alpha@2.163.1-alpha.0(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)':
     dependencies:
-      aws-cdk-lib: 2.188.0(constructs@10.4.2)
+      aws-cdk-lib: 2.189.1(constructs@10.4.2)
       constructs: 10.4.2
 
-  '@aws-cdk/aws-lambda-python-alpha@2.173.2-alpha.0(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)':
+  '@aws-cdk/aws-lambda-python-alpha@2.173.2-alpha.0(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)':
     dependencies:
-      aws-cdk-lib: 2.188.0(constructs@10.4.2)
+      aws-cdk-lib: 2.189.1(constructs@10.4.2)
       constructs: 10.4.2
 
   '@aws-cdk/cloud-assembly-schema@41.2.0': {}
@@ -6843,11 +6862,11 @@ snapshots:
       '@smithy/types': 4.2.0
       tslib: 2.8.1
 
-  '@aws/pdk@0.25.16(@aws-cdk/aws-cognito-identitypool-alpha@2.163.1-alpha.0(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2))(aws-cdk-lib@2.188.0(constructs@10.4.2))(cdk-nag@2.34.23(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2))(constructs@10.4.2)(projen@0.82.8(constructs@10.4.2))':
+  '@aws/pdk@0.25.16(@aws-cdk/aws-cognito-identitypool-alpha@2.163.1-alpha.0(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2))(aws-cdk-lib@2.189.1(constructs@10.4.2))(cdk-nag@2.34.23(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2))(constructs@10.4.2)(projen@0.82.8(constructs@10.4.2))':
     dependencies:
-      '@aws-cdk/aws-cognito-identitypool-alpha': 2.163.1-alpha.0(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)
-      aws-cdk-lib: 2.188.0(constructs@10.4.2)
-      cdk-nag: 2.34.23(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)
+      '@aws-cdk/aws-cognito-identitypool-alpha': 2.163.1-alpha.0(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)
+      aws-cdk-lib: 2.189.1(constructs@10.4.2)
+      cdk-nag: 2.34.23(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)
       constructs: 10.4.2
       projen: 0.82.8(constructs@10.4.2)
 
@@ -7052,9 +7071,9 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@browserbasehq/sdk@2.0.0':
+  '@browserbasehq/sdk@2.5.0':
     dependencies:
-      '@types/node': 18.19.71
+      '@types/node': 18.19.98
       '@types/node-fetch': 2.6.12
       abort-controller: 3.0.0
       agentkeepalive: 4.6.0
@@ -7064,33 +7083,33 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@browserbasehq/stagehand@1.9.0(@playwright/test@1.49.1)(deepmerge@4.3.1)(dotenv@16.4.7)(openai@4.78.1(zod@3.24.1))(zod@3.24.1)':
+  '@browserbasehq/stagehand@1.9.0(@playwright/test@1.49.1)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.78.1(zod@3.24.1))(zod@3.24.1)':
     dependencies:
       '@anthropic-ai/sdk': 0.27.3
-      '@browserbasehq/sdk': 2.0.0
+      '@browserbasehq/sdk': 2.5.0
       '@playwright/test': 1.49.1
       deepmerge: 4.3.1
-      dotenv: 16.4.7
+      dotenv: 16.5.0
       openai: 4.78.1(zod@3.24.1)
       sharp: 0.33.5
-      ws: 8.18.0
+      ws: 8.18.2
       zod: 3.24.1
-      zod-to-json-schema: 3.24.1(zod@3.24.1)
+      zod-to-json-schema: 3.24.5(zod@3.24.1)
     transitivePeerDependencies:
       - bufferutil
       - encoding
       - utf-8-validate
 
-  '@cdklabs/generative-ai-cdk-constructs@0.1.289(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)':
+  '@cdklabs/generative-ai-cdk-constructs@0.1.289(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)':
     dependencies:
-      aws-cdk-lib: 2.188.0(constructs@10.4.2)
-      cdk-nag: 2.34.23(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)
+      aws-cdk-lib: 2.189.1(constructs@10.4.2)
+      cdk-nag: 2.34.23(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)
       constructs: 10.4.2
 
-  '@cdklabs/generative-ai-cdk-constructs@0.1.299(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)':
+  '@cdklabs/generative-ai-cdk-constructs@0.1.299(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)':
     dependencies:
-      aws-cdk-lib: 2.188.0(constructs@10.4.2)
-      cdk-nag: 2.35.65(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2)
+      aws-cdk-lib: 2.189.1(constructs@10.4.2)
+      cdk-nag: 2.35.65(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2)
       constructs: 10.4.2
 
   '@cloudscape-design/collection-hooks@1.0.57(react@18.3.1)':
@@ -7168,7 +7187,7 @@ snapshots:
       react: 18.3.1
       tslib: 2.8.1
 
-  '@emnapi/runtime@1.3.1':
+  '@emnapi/runtime@1.4.3':
     dependencies:
       tslib: 2.8.1
     optional: true
@@ -7289,7 +7308,7 @@ snapshots:
 
   '@ibm-cloud/watsonx-ai@1.3.1':
     dependencies:
-      '@types/node': 18.19.71
+      '@types/node': 18.19.98
       extend: 3.0.2
       ibm-cloud-sdk-core: 5.1.1
     transitivePeerDependencies:
@@ -7361,7 +7380,7 @@ snapshots:
 
   '@img/sharp-wasm32@0.33.5':
     dependencies:
-      '@emnapi/runtime': 1.3.1
+      '@emnapi/runtime': 1.4.3
     optional: true
 
   '@img/sharp-win32-ia32@0.33.5':
@@ -7566,9 +7585,9 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@langchain/community@0.3.24(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-bedrock-agent-runtime@3.726.1)(@aws-sdk/client-bedrock-runtime@3.726.1)(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.0.0)(@browserbasehq/stagehand@1.9.0(@playwright/test@1.49.1)(deepmerge@4.3.1)(dotenv@16.4.7)(openai@4.78.1(zod@3.24.1))(zod@3.24.1))(@ibm-cloud/watsonx-ai@1.3.1)(@langchain/core@0.2.36(openai@4.78.1(zod@3.24.1)))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(ibm-cloud-sdk-core@5.1.1)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.0)':
+  '@langchain/community@0.3.24(@aws-crypto/sha256-js@5.2.0)(@aws-sdk/client-bedrock-agent-runtime@3.726.1)(@aws-sdk/client-bedrock-runtime@3.726.1)(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.5.0)(@browserbasehq/stagehand@1.9.0(@playwright/test@1.49.1)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.78.1(zod@3.24.1))(zod@3.24.1))(@ibm-cloud/watsonx-ai@1.3.1)(@langchain/core@0.2.36(openai@4.78.1(zod@3.24.1)))(@smithy/eventstream-codec@2.2.0)(@smithy/protocol-http@3.3.0)(@smithy/signature-v4@2.3.0)(@smithy/util-utf8@2.3.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(ibm-cloud-sdk-core@5.1.1)(jsonwebtoken@9.0.2)(lodash@4.17.21)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.2)':
     dependencies:
-      '@browserbasehq/stagehand': 1.9.0(@playwright/test@1.49.1)(deepmerge@4.3.1)(dotenv@16.4.7)(openai@4.78.1(zod@3.24.1))(zod@3.24.1)
+      '@browserbasehq/stagehand': 1.9.0(@playwright/test@1.49.1)(deepmerge@4.3.1)(dotenv@16.5.0)(openai@4.78.1(zod@3.24.1))(zod@3.24.1)
       '@ibm-cloud/watsonx-ai': 1.3.1
       '@langchain/core': 0.2.36(openai@4.78.1(zod@3.24.1))
       '@langchain/openai': 0.3.16(@langchain/core@0.2.36(openai@4.78.1(zod@3.24.1)))
@@ -7577,7 +7596,7 @@ snapshots:
       flat: 5.0.2
       ibm-cloud-sdk-core: 5.1.1
       js-yaml: 4.1.0
-      langchain: 0.2.20(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.0.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.0)
+      langchain: 0.2.20(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.5.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.2)
       langsmith: 0.2.15(openai@4.78.1(zod@3.24.1))
       openai: 4.78.1(zod@3.24.1)
       uuid: 10.0.0
@@ -7589,7 +7608,7 @@ snapshots:
       '@aws-sdk/client-bedrock-runtime': 3.726.1
       '@aws-sdk/client-s3': 3.797.0
       '@aws-sdk/credential-provider-node': 3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1)
-      '@browserbasehq/sdk': 2.0.0
+      '@browserbasehq/sdk': 2.5.0
       '@smithy/eventstream-codec': 2.2.0
       '@smithy/protocol-http': 3.3.0
       '@smithy/signature-v4': 2.3.0
@@ -7598,7 +7617,7 @@ snapshots:
       jsonwebtoken: 9.0.2
       lodash: 4.17.21
       playwright: 1.49.1
-      ws: 8.18.0
+      ws: 8.18.2
     transitivePeerDependencies:
       - '@gomomento/sdk-web'
       - '@langchain/anthropic'
@@ -9147,7 +9166,7 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@18.19.71':
+  '@types/node@18.19.98':
     dependencies:
       undici-types: 5.26.5
 
@@ -9329,9 +9348,9 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  aws-cdk-lib@2.188.0(constructs@10.4.2):
+  aws-cdk-lib@2.189.1(constructs@10.4.2):
     dependencies:
-      '@aws-cdk/asset-awscli-v1': 2.2.230
+      '@aws-cdk/asset-awscli-v1': 2.2.235
       '@aws-cdk/asset-node-proxy-agent-v6': 2.1.0
       '@aws-cdk/cloud-assembly-schema': 41.2.0
       constructs: 10.4.2
@@ -9449,6 +9468,11 @@ snapshots:
       ieee754: 1.2.1
       isarray: 1.0.0
 
+  buffer@6.0.3:
+    dependencies:
+      base64-js: 1.5.1
+      ieee754: 1.2.1
+
   callsites@3.1.0: {}
 
   camelcase@5.3.1: {}
@@ -9457,14 +9481,14 @@ snapshots:
 
   caniuse-lite@1.0.30001692: {}
 
-  cdk-nag@2.34.23(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2):
+  cdk-nag@2.34.23(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2):
     dependencies:
-      aws-cdk-lib: 2.188.0(constructs@10.4.2)
+      aws-cdk-lib: 2.189.1(constructs@10.4.2)
       constructs: 10.4.2
 
-  cdk-nag@2.35.65(aws-cdk-lib@2.188.0(constructs@10.4.2))(constructs@10.4.2):
+  cdk-nag@2.35.65(aws-cdk-lib@2.189.1(constructs@10.4.2))(constructs@10.4.2):
     dependencies:
-      aws-cdk-lib: 2.188.0(constructs@10.4.2)
+      aws-cdk-lib: 2.189.1(constructs@10.4.2)
       constructs: 10.4.2
 
   chalk@3.0.0:
@@ -9614,7 +9638,7 @@ snapshots:
     dependencies:
       valtio: 1.13.2(@types/react@18.3.18)(react@18.3.1)
 
-  detect-libc@2.0.3: {}
+  detect-libc@2.0.4: {}
 
   detect-newline@3.1.0: {}
 
@@ -9640,7 +9664,7 @@ snapshots:
       no-case: 3.0.4
       tslib: 2.8.1
 
-  dotenv@16.4.7: {}
+  dotenv@16.5.0: {}
 
   ecdsa-sig-formatter@1.0.11:
     dependencies:
@@ -9702,6 +9726,8 @@ snapshots:
 
   eventemitter3@4.0.7: {}
 
+  events@3.3.0: {}
+
   execa@5.1.1:
     dependencies:
       cross-spawn: 7.0.6
@@ -9746,7 +9772,7 @@ snapshots:
 
   file-type@16.5.4:
     dependencies:
-      readable-web-to-node-stream: 3.0.2
+      readable-web-to-node-stream: 3.0.4
       strtok3: 6.3.0
       token-types: 4.2.1
 
@@ -9847,14 +9873,14 @@ snapshots:
       axios: 1.7.4(debug@4.4.0)
       camelcase: 6.3.0
       debug: 4.4.0
-      dotenv: 16.4.7
+      dotenv: 16.5.0
       extend: 3.0.2
       file-type: 16.5.4
       form-data: 4.0.0
       isstream: 0.1.2
       jsonwebtoken: 9.0.2
       mime-types: 2.1.35
-      retry-axios: 2.6.0(axios@1.7.4)
+      retry-axios: 2.6.0(axios@1.7.4(debug@4.4.0))
       tough-cookie: 4.1.4
     transitivePeerDependencies:
       - supports-color
@@ -10312,9 +10338,9 @@ snapshots:
       lodash.isstring: 4.0.1
       lodash.once: 4.1.1
       ms: 2.1.3
-      semver: 7.6.3
+      semver: 7.7.1
 
-  jwa@1.4.1:
+  jwa@1.4.2:
     dependencies:
       buffer-equal-constant-time: 1.0.1
       ecdsa-sig-formatter: 1.0.11
@@ -10322,12 +10348,12 @@ snapshots:
 
   jws@3.2.2:
     dependencies:
-      jwa: 1.4.1
+      jwa: 1.4.2
       safe-buffer: 5.2.1
 
   kleur@3.0.3: {}
 
-  langchain@0.2.20(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.0.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.0):
+  langchain@0.2.20(@aws-sdk/client-s3@3.797.0)(@aws-sdk/credential-provider-node@3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1))(@browserbasehq/sdk@2.5.0)(axios@1.7.4)(fast-xml-parser@4.5.1)(openai@4.78.1(zod@3.24.1))(playwright@1.49.1)(ws@8.18.2):
     dependencies:
       '@langchain/core': 0.2.36(openai@4.78.1(zod@3.24.1))
       '@langchain/openai': 0.2.11
@@ -10346,11 +10372,11 @@ snapshots:
     optionalDependencies:
       '@aws-sdk/client-s3': 3.797.0
       '@aws-sdk/credential-provider-node': 3.726.0(@aws-sdk/client-sso-oidc@3.726.0(@aws-sdk/client-sts@3.726.1))(@aws-sdk/client-sts@3.726.1)
-      '@browserbasehq/sdk': 2.0.0
+      '@browserbasehq/sdk': 2.5.0
       axios: 1.7.4(debug@4.4.0)
       fast-xml-parser: 4.5.1
       playwright: 1.49.1
-      ws: 8.18.0
+      ws: 8.18.2
     transitivePeerDependencies:
       - encoding
       - openai
@@ -10607,6 +10633,8 @@ snapshots:
       '@jest/schemas': 29.6.3
       ansi-styles: 5.2.0
       react-is: 18.3.1
+
+  process@0.11.10: {}
 
   projen@0.82.8(constructs@10.4.2):
     dependencies:
@@ -11039,15 +11067,17 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  readable-stream@3.6.2:
+  readable-stream@4.7.0:
     dependencies:
-      inherits: 2.0.4
+      abort-controller: 3.0.0
+      buffer: 6.0.3
+      events: 3.3.0
+      process: 0.11.10
       string_decoder: 1.3.0
-      util-deprecate: 1.0.2
 
-  readable-web-to-node-stream@3.0.2:
+  readable-web-to-node-stream@3.0.4:
     dependencies:
-      readable-stream: 3.6.2
+      readable-stream: 4.7.0
 
   redent@3.0.0:
     dependencies:
@@ -11080,7 +11110,7 @@ snapshots:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
-  retry-axios@2.6.0(axios@1.7.4):
+  retry-axios@2.6.0(axios@1.7.4(debug@4.4.0)):
     dependencies:
       axios: 1.7.4(debug@4.4.0)
 
@@ -11129,13 +11159,15 @@ snapshots:
 
   semver@7.6.3: {}
 
+  semver@7.7.1: {}
+
   set-blocking@2.0.0: {}
 
   sharp@0.33.5:
     dependencies:
       color: 4.2.3
-      detect-libc: 2.0.3
-      semver: 7.6.3
+      detect-libc: 2.0.4
+      semver: 7.7.1
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.33.5
       '@img/sharp-darwin-x64': 0.33.5
@@ -11390,8 +11422,6 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  util-deprecate@1.0.2: {}
-
   uuid@10.0.0: {}
 
   uuid@11.0.5: {}
@@ -11477,7 +11507,7 @@ snapshots:
       imurmurhash: 0.1.4
       signal-exit: 3.0.7
 
-  ws@8.18.0: {}
+  ws@8.18.2: {}
 
   xstate@4.38.3: {}
 
@@ -11525,6 +11555,10 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   zod-to-json-schema@3.24.1(zod@3.24.1):
+    dependencies:
+      zod: 3.24.1
+
+  zod-to-json-schema@3.24.5(zod@3.24.1):
     dependencies:
       zod: 3.24.1
 
