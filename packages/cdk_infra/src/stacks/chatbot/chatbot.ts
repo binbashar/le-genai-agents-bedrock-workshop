@@ -67,7 +67,8 @@ export class ChatBotStack extends cdk.Stack {
                     AGENT: bedrockAgentsStack.AGENT,
                     AGENT_ALIAS: bedrockAgentsStack.AGENT_ALIAS,
                     AGENT_KB: props.bedrockKnowledgeBaseStack?.AGENT_KB ?? null,
-                    PREFIX: props.stackNamePrefix
+                    PREFIX: props.stackNamePrefix,
+                    userPool: props.commonStack.userPool
                 },
             );
             basicRestApiStack.addDependency(bedrockAgentsStack);

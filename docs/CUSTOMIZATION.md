@@ -57,7 +57,7 @@ The deployment creates a Knowledge Base with:
 
 #### Metadata Filtering
 
-For detailed information about metadata filtering, please refer to the [Metadata Filtering Guide](#metadata-filtering-for-knowledge-base)
+For detailed information about metadata filtering, please refer to the [Metadata Filtering Guide](API_TESTING.md#metadata-filtering-for-knowledge-base)
 
 ### Create Your Own Actions (Tools) 
 

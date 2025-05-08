@@ -66,31 +66,6 @@ Natural language to SQL conversion using Bedrock Agent
 - [Amazon IAM](https://aws.amazon.com/iam/)
 - [Amazon Cognito](https://aws.amazon.com/cognito/)
 
-### Case 3. Document Processing
-Automated document processing and validation using Bedrock Agent
-
-![Document Processing Architecture](../../assets/images/documentprocessing.png)
-
-### Features
-
-- Amazon Bedrock Agent for document processing and validation
-- Dedicated S3 buckets for document input and output
-- Document validation Lambda functions
-- Document processing Lambda functions
-- REST API for document processing operations
-- CloudWatch dashboard for monitoring
-- Sample UI running on your local host with Cognito auth
-
-### Services in Use for Document Processing
-
-- [Amazon Bedrock](https://aws.amazon.com/bedrock/)
-- [Amazon S3](https://aws.amazon.com/s3/)
-- [Amazon API Gateway](https://aws.amazon.com/api-gateway/)
-- [AWS Lambda](https://aws.amazon.com/lambda/)
-- [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/)
-- [Amazon IAM](https://aws.amazon.com/iam/)
-- [Amazon Cognito](https://aws.amazon.com/cognito/)
-
 ## Backend structure
 
 ```directory 
@@ -103,7 +78,6 @@ packages
        │   │   ├── agents                        # Bedrock Agent Action Group
        │   │   │   ├── account_actions           # Sample action code and schema for Chatbot
        │   │   │   ├── text2sql                  # Sample Text2SQL action code
-       │   │   │   └── documentprocessing        # Document processing action code
        │   │   ├── basic_rest_api                # REST API lambda code 
        │   │   ├── chat_summary                  # (Optional) Pluggable feature
        │   │   └── common                        # Lambda layers
@@ -111,7 +85,6 @@ packages
        │   ├── prompt                            # Default prompts for Agent  
        │   │   ├── instruction                   # Agent instructions
        │   │   ├── ochestration/text2sql         # Template and prompt generator for Text2SQL
-       │   │   └── documentprocessing            # Document processing prompts
        │   └── stacks                            # CDK core stacks of workshop
        │       ├── chatbot
        │       │   ├── bedrock-agents-stack.ts
@@ -120,9 +93,6 @@ packages
        │       │   ├── athena-stack.ts
        │       │   ├── bedrock-text2sql-agent-stack.ts
        │       │   └── text2sql.ts
-       │       ├── documentprocessing
-       │       │   ├── bedrock-bda-agent-stack.ts
-       │       │   └── documentprocessing.ts
        │       ├── basic-rest-api-stack.ts
        │       ├── bedrock-kb-stack.ts
        │       └── common-stack.ts  
@@ -179,43 +149,6 @@ The `BasicRestApiStack` is responsible for creating a basic REST API that interf
 5. **Pluggable Constructs:**
     - `ChatSummaryWithSessionId`: A construct that adds a chat summary feature to the API interface (`/chat-summary`). It integrates with the REST API, the SessionsTable, and the custom authorizer.
 
-### DocumentProcessingStack
-
-The `DocumentProcessingStack` is responsible for setting up resources required for the document processing use case. It creates the following resources:
-
-1. **S3 Buckets:**
-   - DocumentInputBucket: For storing input documents for processing
-   - DocumentOutputBucket: For storing processed documents
-   - Both buckets are configured with:
-     - SSL enforcement
-     - Versioning enabled
-     - Public read access blocked
-     - S3 managed encryption
-     - Auto-deletion of objects on stack deletion
-
-2. **BedrockDocumentProcessingStack:**
-   - Creates a Bedrock agent for document processing
-   - Sets up Lambda functions for document validation and processing
-   - Configures CloudWatch dashboard for monitoring
-   - Implements action groups for:
-     - Document validation
-     - Document processing
-     - Blueprint creation
-
-3. **BasicRestApiStack:**
-   - Creates a REST API for document processing operations
-   - Integrates with the Bedrock agent and S3 buckets
-   - Includes necessary IAM roles and policies
-   - Provides session management for API interactions
-
-The document processing flow is as follows:
-1. User uploads document to Input Bucket
-2. Bedrock Data Automation triggers processing
-3. Document Processing Lambda processes the document
-4. Validation Lambda validates the results
-5. Results are stored in Output Bucket
-6. User can interact with the system through the API
-
 ## Deploy Cases
 
 ### ChatbotStack
@@ -258,20 +191,6 @@ The `BedrockText2SqlAgentsStack` is responsible for creating and managing Amazon
    - **athena-schema-reader:** For reading schema information from Athena.
 3. **Lambda Functions:** Lambda functions are created for handling the actions defined in the action groups.
 4. **CloudWatch Dashboard:** A custom CloudWatch dashboard is created for monitoring the Bedrock agent.
-
-### DocumentProcessingStack
-
-The Document Processing stack is responsible for setting up resources required for the document processing use case.
-It creates the `BedrockDocumentProcessingStack` and `BasicRestApiStack` stacks.
-
-#### BedrockDocumentProcessingStack
-
-The `BedrockDocumentProcessingStack` is responsible for creating and managing Amazon Bedrock agents specifically designed for document processing operations. It creates the following resources:
-
-1. **Amazon Bedrock Agent:** An agent designed to process and validate documents.
-2. **Agent Action Groups:** Action groups for document processing and validation.
-3. **Lambda Functions:** Lambda functions for document processing and validation.
-4. **CloudWatch Dashboard:** A custom CloudWatch dashboard for monitoring the document processing operations.
 
 ## Other Constructs (Commented Out)
 

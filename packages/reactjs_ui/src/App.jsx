@@ -13,7 +13,6 @@ import Footer from './components/Footer'
 import BedrockAgent from "./views/BedrockAgent"
 import MultiModalLLM from "./views/MultiModalLLM"
 import Prompt from "./views/Prompt"
-import KYBDocuments from "./views/KYBDocuments"
 import React from 'react';
 
 const App = ({ signOut, user }) => {

@@ -15,14 +15,15 @@ import { Table } from "aws-cdk-lib/aws-dynamodb";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import { Construct } from "constructs";
+import { UserPool } from "aws-cdk-lib/aws-cognito";
 
 export interface ChatSummaryWithSessionIdProps {
   restApi: apigateway.RestApi;
   sessionTable: Table;
-  customAuthorizer: PythonFunction;
   LAYER_BOTO: PythonLayerVersion;
   LAYER_POWERTOOLS: PythonLayerVersion;
   PREFIX: string;
+  userPool: UserPool;
 }
 
 export class ChatSummaryWithSessionId extends Construct {
@@ -105,14 +106,18 @@ export class ChatSummaryWithSessionId extends Construct {
         allowMethods: apigateway.Cors.ALL_METHODS,
       },
     });
+
+    // Create Cognito User Pool Authorizer
+    const authorizer = new apigateway.CognitoUserPoolsAuthorizer(this, 'CognitoAuthorizer', {
+      cognitoUserPools: [_props.userPool]
+    });
+
     apiResource.addMethod(
       "POST",
       new apigateway.LambdaIntegration(chatSummaryWithSessionIdBackend),
       {
-        authorizationType: apigateway.AuthorizationType.CUSTOM,
-        authorizer: new apigateway.TokenAuthorizer(this, "TokenAuthorizer", {
-          handler: _props.customAuthorizer,
-        }),
+        authorizationType: apigateway.AuthorizationType.COGNITO,
+        authorizer: authorizer
       },
     );
   }

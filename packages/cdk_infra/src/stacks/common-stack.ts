@@ -34,6 +34,7 @@ export class CommonStack extends Stack {
   public readonly LAYER_PYDANTIC: PythonLayerVersion;
   public readonly USER_IDENTITY: UserIdentity;
   public readonly ACCESS_LOG_BUCKET: s3.Bucket;
+  public readonly userPool: UserPool;
 
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
@@ -114,6 +115,7 @@ export class CommonStack extends Stack {
     });
 
     this.USER_IDENTITY = userIdentity;
+    this.userPool = userIdentity.userPool;
 
     // Sample Users and Groups
     let usersOutput: string[] = [];

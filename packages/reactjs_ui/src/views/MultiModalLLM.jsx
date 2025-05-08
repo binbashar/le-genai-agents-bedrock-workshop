@@ -111,7 +111,7 @@ export default () => {
         const currentModelId = modelPickerRef.current.getModelId()
         console.log(currentModelId)
         const systemPrompt = selectedPrompt
-            ? `${selectedPrompt.RoleTitle}\n\n${selectedPrompt.RoleDescription}\n\n${selectedPrompt.BackgroundInformation}\n\n${selectedPrompt.ToneAndCommunicationStyle}\n\n${selectedPrompt.KnowledgeAndExpertise}\n\n${selectedPrompt.LimitationsAndBoundaries}\n\n${selectedPrompt.SampleDialoguesOrScenarios}\n\n${selectedPrompt.EvaluationCriteria}\n\n${selectedPrompt.FeedbackAndIteration}\n\n${selectedPrompt.AdditionalResources}`
+            ? `You are acting strictly as a ${selectedPrompt.RoleTitle}. Only answer questions relevant to your domain. If a question is outside your area of expertise, politely respond that you cannot answer it because it is not related to your role.\n\n${selectedPrompt.RoleDescription}\n\n${selectedPrompt.BackgroundInformation}\n\n${selectedPrompt.ToneAndCommunicationStyle}\n\n${selectedPrompt.KnowledgeAndExpertise}\n\n${selectedPrompt.LimitationsAndBoundaries}\n\n${selectedPrompt.SampleDialoguesOrScenarios}\n\n${selectedPrompt.EvaluationCriteria}\n\n${selectedPrompt.FeedbackAndIteration}\n\n${selectedPrompt.AdditionalResources}`
             : null;
 
         setLoading(true)

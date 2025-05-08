@@ -86,7 +86,8 @@ export class Text2SQLStack extends cdk.Stack {
       AGENT: bedrockText2SqlAgentsStack.AGENT,
       AGENT_ALIAS: bedrockText2SqlAgentsStack.AGENT_ALIAS,
       AGENT_KB: props.bedrockKnowledgeBaseStack?.AGENT_KB ?? null,
-      PREFIX: props.stackNamePrefix
+      PREFIX: props.stackNamePrefix,
+      userPool: props.commonStack.userPool
     });
     text2SqlBasicRestApiStack.addDependency(bedrockText2SqlAgentsStack);
 

@@ -19,6 +19,7 @@ import { Construct } from "constructs";
 import { ChatSummaryWithSessionId } from "../constructs/chat-summary-with-sessionid";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as cdk from 'aws-cdk-lib';
+import { UserPool } from "aws-cdk-lib/aws-cognito";
 
 export interface BasicRestApiStackProps extends StackProps {
   env: cdk.Environment;
@@ -33,6 +34,8 @@ export interface BasicRestApiStackProps extends StackProps {
   // Document Processing specific properties
   DOCUMENT_INPUT_BUCKET?: s3.Bucket;
   DOCUMENT_OUTPUT_BUCKET?: s3.Bucket;
+  // Cognito User Pool
+  userPool: UserPool;
 }
 
 export class BasicRestApiStack extends Stack {
@@ -60,22 +63,6 @@ export class BasicRestApiStack extends Stack {
 
     // * AWS Lambda
     let basicRestApiLambdaDir = "src/backend/basic_rest_api/lambda";
-
-    // Custom Lambda Authorizer for API Gateway
-    const customAuthorizer = new PythonFunction(this, prefixName+"CustomAuthorizer", {
-      entry: path.join(basicRestApiLambdaDir, "custom_authorizer"),
-      runtime: lambda.Runtime.PYTHON_3_11,
-      index: "custom_authorizer.py",
-      handler: "lambda_handler",
-      timeout: Duration.seconds(300),
-      memorySize: 256,
-      reservedConcurrentExecutions: 5,
-      environment: {
-        POWERTOOLS_LOG_LEVEL: "INFO",
-        POWERTOOLS_SERVICE_NAME: "QnaAgentApi",
-      },
-      layers: [props.LAYER_POWERTOOLS, props.LAYER_BOTO],
-    });
 
     // Lambda function role for log access, dynamodb read/write permissions, and bedrock invocation permissions.
     const lambdaRole = new iam.Role(this, prefixName+"CustomAuthorizerRole", {
@@ -156,7 +143,7 @@ export class BasicRestApiStack extends Stack {
 
     // * Amazon API Gateway
 
-    // Basic Rest API with a Custom AWS Lambda Authorizer that calls the QnA Agent
+    // Basic Rest API with Cognito User Pool Authorizer
     const qnaAgentRestApi = new apigateway.RestApi(this, prefixName+"QnAAgentRestApi");
     const apiResource = qnaAgentRestApi.root.addResource("qna-agent", {
       defaultCorsPreflightOptions: {
@@ -164,14 +151,18 @@ export class BasicRestApiStack extends Stack {
         allowMethods: apigateway.Cors.ALL_METHODS,
       },
     });
+
+    // Create Cognito User Pool Authorizer
+    const authorizer = new apigateway.CognitoUserPoolsAuthorizer(this, 'CognitoAuthorizer', {
+      cognitoUserPools: [props.userPool]
+    });
+
     apiResource.addMethod(
       "POST",
       new apigateway.LambdaIntegration(qnaAgentRestApiBackend),
       {
-        authorizationType: apigateway.AuthorizationType.CUSTOM,
-        authorizer: new apigateway.TokenAuthorizer(this, "TokenAuthorizer", {
-          handler: customAuthorizer,
-        }),
+        authorizationType: apigateway.AuthorizationType.COGNITO,
+        authorizer: authorizer
       },
     );
 
@@ -181,10 +172,10 @@ export class BasicRestApiStack extends Stack {
     new ChatSummaryWithSessionId(this, prefixName+"ChatSummaryWithSessionId", {
       restApi: qnaAgentRestApi,
       sessionTable: sessionsTable,
-      customAuthorizer: customAuthorizer,
       LAYER_BOTO: props.LAYER_BOTO,
       LAYER_POWERTOOLS: props.LAYER_POWERTOOLS,
-      PREFIX: prefixName
+      PREFIX: prefixName,
+      userPool: props.userPool
     });
 
     // Create Lambda function for Bedrock Agent
