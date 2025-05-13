@@ -47,8 +47,7 @@ export default () => {
             { type: "divider" },
             {
               type: "section", text: "Amazon Bedrock Agents", items: [
-                { type: 'link', text: `Agent Chatbot`, href: `/bedrockagent` },
-                { type: 'link', text: `Document Processing`, href: `/kybdocuments` },
+                { type: 'link', text: `Agent Chatbot`, href: `/bedrockagent` }
               ]
             },
             {type: "divider"},

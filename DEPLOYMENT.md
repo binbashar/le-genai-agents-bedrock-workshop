@@ -203,11 +203,11 @@ After deploying the packages/cdk_infra project, you'll have a sample Amazon Cogn
 
     - User Pool ID 
       - From the Menu in Amazon Cognito -> User Pools
+   - Web Client ID
+      - From the Menu in Amazon Cognito -> User Pools -> your_user_pool
+      - Applications -> App Clients -> copy the Client ID
     - Identity Pool ID 
       - From the Menu in Amazon Cognito -> Identity pools
-    - Web Client ID
-        - From the Menu in Amazon Cognito -> User Pools -> your user pool
-        - Applications -> App Clients -> copy the Client ID
 
 
 3. Update [aws-exports.js](packages/reactjs_ui/src/aws-exports.js) file with the collected values (located at `packages/reactjs_ui/src`). Replace the example values in the file with your own:
@@ -219,8 +219,6 @@ After deploying the packages/cdk_infra project, you'll have a sample Amazon Cogn
     "aws_cognito_region": "us-west-2",
     "aws_user_pools_id": "us-west-2_e2bc0Jiyk",
     "aws_user_pools_web_client_id": "60pgcj9fas0cig379pkicri954"
-    // "kyb_api_endpoint": "..." // Ensure this line is commented out if not used
-    // "document_processing_input_bucket": "..." // Ensure this line is commented out if not used
    }
    ```
    - If you're not using the `us-west-2` region, update both `aws_project_region` and `aws_cognito_region` in this file to match your deployment region

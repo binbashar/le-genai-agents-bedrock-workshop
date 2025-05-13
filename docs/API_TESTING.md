@@ -6,27 +6,80 @@
 2. Go to [API Gateway](https://console.aws.amazon.com/apigateway).
 3. You can get the API URL from API Gateway, use the PROD stage URL.
 
-- **URL: {apiurl}/qna-agent**
+### Authentication
 
-```json
-    {
-        "sessionId": "",
-        "message" : "Hello",
-        "metadata": {} 
-    }
+Before making API requests, you need to authenticate using Cognito:
+
+**If you see an error like `Auth flow not enabled for this client`, you need to enable the ADMIN_USER_PASSWORD_AUTH flow for your Cognito app client:**
+
+1. Go to the [Amazon Cognito Console](https://console.aws.amazon.com/cognito/).
+2. Select your user pool.
+3. Go to **App integration** > **App clients and analytics**.
+4. Click on your app client.
+5. Under **Authentication flows**, enable:
+   - `ADMIN_USER_PASSWORD_AUTH` (for admin-initiated auth)
+   - `USER_PASSWORD_AUTH` (for user-initiated auth, if needed)
+6. Save changes.
+
+Or, using the AWS CLI:
+```sh
+aws cognito-idp update-user-pool-client \
+  --user-pool-id <your-user-pool-id> \
+  --client-id <your-client-id> \
+  --explicit-auth-flows ALLOW_ADMIN_USER_PASSWORD_AUTH ALLOW_USER_PASSWORD_AUTH ALLOW_REFRESH_TOKEN_AUTH ALLOW_USER_SRP_AUTH ALLOW_CUSTOM_AUTH  
 ```
+
+Then proceed with authentication:
+
+1. Sign in to your Cognito User Pool:
+   - Use the AWS Console or your application's login page
+   - Or use the AWS CLI:
+     ```bash
+     aws cognito-idp admin-initiate-auth \
+       --user-pool-id <your-user-pool-id> \
+       --client-id <your-client-id> \
+       --auth-flow ADMIN_USER_PASSWORD_AUTH \
+       --auth-parameters USERNAME=<username>,PASSWORD=<password>
+     ```
+
+2. Get the ID token from the authentication response
+
+3. Include the token in your API requests:
+   - Add the Authorization header: `Authorization: Bearer <your-id-token>`
+
+### Making API Requests
+
+- **URL: {apiurl}/qna-agent**
+- **Headers:**
+  ```
+  Content-Type: application/json
+  Authorization: Bearer <your-id-token>
+  ```
+- **Body:**
+  ```json
+  {
+      "sessionId": "",
+      "message": "Hello",
+      "metadata": {} 
+  }
+  ```
 
 ### Chat summary (Optional)
 
 You can test chat summary construct using the same API Url.
 
 - **URL: {apiurl}/chat-summary**
-
-```json
-    {
-        "sessionId": "{sessionId}" 
-    }
-```
+- **Headers:**
+  ```
+  Content-Type: application/json
+  Authorization: Bearer <your-id-token>
+  ```
+- **Body:**
+  ```json
+  {
+      "sessionId": "{sessionId}" 
+  }
+  ```
 
 ### Update Agent Alias
 
@@ -135,6 +188,89 @@ Multiple conditions:
 }
 ```
 
+Access Control Example:
+```json
+{
+    "message": "Show me the security guidelines",
+    "metadata": {
+        "in": {
+            "key": "allowed_roles",
+            "value": ["admin", "security_team"]
+        }
+    }
+}
+```
+
+This access control example demonstrates how to:
+1. Control access based on user roles
+2. Use the `in` operator to check if the user's role is in the allowed roles list
+3. Keep the access control simple and focused on role-based permissions
+
+Mixed Metadata Structure Example:
+```json
+{
+    "message": "Show me all security guidelines and Lambda documentation",
+    "metadata": {
+        "orAll": [
+            {
+                "andAll": [
+                    {
+                        "equals": {
+                            "key": "department",
+                            "value": "security"
+                        }
+                    },
+                    {
+                        "equals": {
+                            "key": "access_level",
+                            "value": "confidential"
+                        }
+                    }
+                ]
+            },
+            {
+                "equals": {
+                    "key": "service",
+                    "value": "lambda"
+                }
+            }
+        ]
+    }
+}
+```
+
+This example shows how to:
+1. Use `orAll` to combine different metadata structures
+2. Keep the access control conditions for the security document
+3. Include the simpler metadata filter for Lambda documents
+4. Search across both types of documents in a single query
+
+For example, if you have:
+- A security document with metadata:
+```json
+{
+    "metadataAttributes": {
+        "department": "security",
+        "access_level": "confidential",
+        "allowed_roles": ["admin", "security_team"]
+    }
+}
+```
+- And Lambda documents with metadata:
+```json
+{
+    "metadataAttributes": {
+        "service": "lambda",
+        "topic": "quota",
+        "year": 2014
+    }
+}
+```
+
+The query will return both:
+- The security document (if access control conditions are met)
+- Any Lambda documents (matching the service filter)
+
 #### Response with Metadata
 
 When you use metadata filtering, the API response will include citation information with the relevant metadata:
@@ -159,6 +295,8 @@ When you use metadata filtering, the API response will include citation informat
 
 - Use meaningful and consistent metadata attributes across your documents.
 - Keep metadata simple and relevant to your use case.
-- Test different metadata filters to ensure they retrieve the expected information. 
+- Test different metadata filters to ensure they retrieve the expected information.
+- Always include the Cognito ID token in your API requests.
+- Handle token expiration by refreshing the token when needed.
  
 For more details on metadata filtering options, refer to [the Amazon Bedrock documentation on Metadata and filtering.](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html) 
