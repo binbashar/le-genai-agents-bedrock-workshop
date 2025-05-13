@@ -103,7 +103,7 @@ packages
 This application provides a set of [AWS CDK stacks](/packages/cdk_infra/src/stacks/) and [constructs](/packages/cdk_infra/src/constructs/) for deploying and managing various components related to Amazon Bedrock and AI services. The main components include:
 
 ### Case 4. All
-This will deploy all use cases (Chatbot, Text2SQL, and Document Processing). It will create all the resources mentioned in the above use cases.
+This will deploy all use cases (Chatbot, Text2SQL). It will create all the resources mentioned in the above use cases.
 
 ## CDK Stacks
 
@@ -113,8 +113,6 @@ The `CommonStack` is responsible for setting up common resources that are shared
 
 1. **Amazon S3 Buckets:**
    - AccessLogsBucket: An S3 bucket used for storing access logs of other buckets. It has a lifecycle policy to transition objects to Glacier after 90 days and expire them after 365 days.
-   - DocumentInputBucket: An S3 bucket for storing input documents for processing.
-   - DocumentOutputBucket: An S3 bucket for storing processed documents.
 2. **AWS Lambda Layers for Python:**
    - Boto3Layer: A Lambda layer containing the latest version of the Boto3 library.
    - LambdaPowertoolsLayer: A Lambda layer containing version 2.43.1 of the AWS Lambda Powertools library, compatible with both x86_64 and ARM_64 architectures.
