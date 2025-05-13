@@ -9,7 +9,7 @@ Follow this guide after reviewing the [prerequisites in the main README](README.
 This document provides comprehensive setup instructions for:
 - Backend infrastructure
 - Frontend application
-- Use cases: Chatbot, Text2SQL
+- Agent Use cases: Chatbot, Text2SQL 
 
 ## Table of Contents
 
@@ -127,7 +127,7 @@ If your agent requires external API keys (like the Web Search action group using
          - For the Chatbot: `packages/cdk_infra/src/stacks/bedrock-agent-stacks.ts`
          - For Text2SQL: `packages/cdk_infra/src/stacks/bedrock-text2sql-agent-stacks.ts`
 
-      3. Check the model ARN in your code. For example, the default Claude 3 Sonnet model ARN for `us-west-2` is:
+      3. Check the model ARN in your code. For example, the default Claude 3.5 Sonnet V2 model ARN for `us-west-2` is:
            ```typescript
            "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0"
            ``` 
