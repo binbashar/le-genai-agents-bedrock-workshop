@@ -36,7 +36,7 @@
     "@cloudscape-design/components": "^3.0.866",
     "@cloudscape-design/design-tokens": "^3.0.51",
     "@cloudscape-design/global-styles": "^1.0.34",
-    "@langchain/community": "^0.3.3",
+    "@langchain/community": "^1.1.14",
     "@langchain/core": "^0.2.26",
     "@langchain/openai": "^0.3.16",
     "@smithy/eventstream-codec": "^2.1.1",
