@@ -94,3 +94,8 @@ Backend: Bedrock, OpenSearch Serverless, S3, API Gateway, Lambda, DynamoDB, Clou
 - Node.js ≥20.18.1, PNPM 9.15.0, Python ≥3.12, Docker
 - Bedrock model access: Claude (Sonnet 3.5, 4), Titan Embeddings v2, Nova Lite
 - Always use binbash profile. Do not use other AWS profiles. Do not export the AWS_PROFILE if you are using it.
+
+### Git Hygiene
+- `packages/reactjs_ui/src/aws-exports.js` contains real Cognito IDs — gitignored, never commit
+- `.mcp.json` is local dev config — gitignored, never commit
+- `.env.example` is the safe template (empty values) — committed as reference
