@@ -25,7 +25,7 @@ import * as iam from "aws-cdk-lib/aws-iam";
 // import { EmailInputOutputProcessing } from '../constructs/email-input-agent-output';
 
 interface BedrockAgentsStackProps extends StackProps {
-  AGENT_KB: bedrock.KnowledgeBase | null;
+  AGENT_KB: bedrock.VectorKnowledgeBase | null;
   LAYER_BOTO: PythonLayerVersion;
   LAYER_POWERTOOLS: PythonLayerVersion;
   LAYER_PYDANTIC: PythonLayerVersion;
@@ -44,13 +44,21 @@ export class BedrockAgentsStack extends Stack {
       "utf8",
     );
 
+    // * Define Claude Sonnet 4 model with regional inference profile
+    const CLAUDE_SONNET_4 = new bedrock.BedrockFoundationModel(
+      'us.anthropic.claude-sonnet-4-20250514-v1:0',
+      {
+        supportsAgents: true,
+        supportsCrossRegion: true,
+        optimizedForAgents: true
+      }
+    );
+
     // * Amazon Bedrock Agent
     const qnaActionsAgent = new bedrock.Agent(this, "QnAActionsAgent", {
       name: (cdk.Stack.of(this) + "-" + "QnAActionsAgent").replace("/", "-"),
-      foundationModel:
-        bedrock.BedrockFoundationModel.ANTHROPIC_CLAUDE_3_5_SONNET_V2_0,
+      foundationModel: CLAUDE_SONNET_4,
       shouldPrepareAgent: true,
-      enableUserInput: true,
       instruction:
         "You are a helpful and friendly customer service agent for " +
         this.node.tryGetContext("custom:companyName") +
@@ -60,11 +68,16 @@ export class BedrockAgentsStack extends Stack {
         instruction,
       description:
         "Agent used for executing Actions, and also for Question Answering from a Knowledge Base",
-      aliasName: "latest",
     });
 
     this.AGENT = qnaActionsAgent;
-    this.AGENT_ALIAS = qnaActionsAgent.aliasId;
+    
+    // Create agent alias
+    const agentAlias = new bedrock.AgentAlias(this, "QnAActionsAgentAlias", {
+      agent: qnaActionsAgent,
+      aliasName: "latest",
+    });
+    this.AGENT_ALIAS = agentAlias.aliasId;
 
     // Agent Actions
     let agentsLambdaDir = "src/backend/agents/lambda";
@@ -97,15 +110,13 @@ export class BedrockAgentsStack extends Stack {
 
     // Agent Action Group for Account Actions
     qnaActionsAgent.addActionGroup(
-      new AgentActionGroup(this, "QnAActionsAgentAG", {
-        actionGroupName: "agent-account-actions",
+      new AgentActionGroup({
+        name: "agent-account-actions",
         description:
           "Use these functions to take actions on authenticated user's accounts",
-        actionGroupExecutor: {
-          lambda: agentAccountActions,
-        },
-        actionGroupState: "ENABLED",
-        apiSchema: bedrock.ApiSchema.fromAsset(
+        executor: bedrock.ActionGroupExecutor.fromlambdaFunction(agentAccountActions),
+        enabled: true,
+        apiSchema: bedrock.ApiSchema.fromLocalAsset(
           path.join(agentsLambdaDir, "account_actions", "openapi.json"),
         ),
       }),
@@ -155,15 +166,13 @@ export class BedrockAgentsStack extends Stack {
 
     // Web Search Agent Action Group
     qnaActionsAgent.addActionGroup(
-      new AgentActionGroup(this, "WebSearchAgentAG", { // Unique construct ID
-        actionGroupName: "agent-web-search-actions",
+      new AgentActionGroup({ // Unique construct ID
+        name: "agent-web-search-actions",
         description:
           "Use this function to search the web for information.",
-        actionGroupExecutor: {
-          lambda: agentWebSearchActions,
-        },
-        actionGroupState: "ENABLED",
-        apiSchema: bedrock.ApiSchema.fromAsset(
+        executor: bedrock.ActionGroupExecutor.fromlambdaFunction(agentWebSearchActions),
+        enabled: true,
+        apiSchema: bedrock.ApiSchema.fromLocalAsset(
           path.join(agentsLambdaDir, "web_search_actions", "openapi.json"), // New OpenAPI schema
         ),
       }),
@@ -185,13 +194,13 @@ export class BedrockAgentsStack extends Stack {
 
     // provides monitoring for a specific model with on-demand pricing calculation
     // pricing details are available here: https://aws.amazon.com/bedrock/pricing/
+    // Claude Sonnet 4 pricing: $3/$15 per million tokens (input/output)
     bddashboard.addModelMonitoring(
-      "Claude Sonnet 3",
-      // Claude Sonnet 3 ARN (us-west-2) - Update region in ARN if necessary
-      "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-sonnet-20240229-v1:0",
+      "Claude Sonnet 4",
+      "us.anthropic.claude-sonnet-4-20250514-v1:0",
       {
-        inputTokenPrice: 0.003, // On-demand Price per 1K input tokens
-        outputTokenPrice: 0.015, // Price per 1K output tokens
+        inputTokenPrice: 0.003, // $3 per 1M input tokens = $0.003 per 1K
+        outputTokenPrice: 0.015, // $15 per 1M output tokens = $0.015 per 1K
       },
     );
 

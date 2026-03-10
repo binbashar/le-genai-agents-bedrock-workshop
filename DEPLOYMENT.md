@@ -32,7 +32,16 @@ aws sts get-caller-identity
 aws configure get region
 ```
 
-- If you are logged into another account, and you want to use an account that is in another profile  for this workshop, execute the following.
+- For AWS SSO users, login first:
+   ```bash
+   aws sso login --profile your_profile_name
+   ```
+- For traditional AWS credentials, configure them:
+   ```bash
+   aws configure
+   ```
+
+- If you are logged into another account, and you want to use an account that is in another profile for this workshop, execute the following:
 ```bash
 export AWS_PROFILE=your_profile_for_this_workshop
 ```
@@ -48,10 +57,19 @@ aws configure set default.region <REGION NAME>
 Replace <REGION NAME> with your desired region (e.g., `us-west-2`).
 
 - Check if CDK is bootstrapped in your account:
+   
+   **Option 1: Using AWS CLI**
+   ```bash
+   aws cloudformation describe-stacks --stack-name CDKToolkit --query 'Stacks[0].StackStatus' --output text 2>/dev/null || echo "CDK not bootstrapped"
+   ```
+   If you see a status like `CREATE_COMPLETE` or `UPDATE_COMPLETE`, CDK is bootstrapped. If you see "CDK not bootstrapped", proceed to bootstrap.
+
+   **Option 2: Using AWS Console**
    1. Go to the [Amazon CloudFormation console](https://console.aws.amazon.com/cloudformation).
    2. Look for a stack named `CDKToolkit`.
    3. If the `CDKToolkit` stack exists, CDK has already been bootstrapped in your account and region.
-   4. If you don't see the `CDKToolkit` stack, you need to bootstrap CDK. Run the following command:
+   
+   4. If CDK is not bootstrapped, run the following command:
      ```bash
      cdk bootstrap aws://ACCOUNT-NUMBER/REGION
      ```
@@ -76,12 +94,31 @@ This step is mandatory if you are deploying the **`chatbot`** use case or the **
 
 If your agent requires external API keys (like the Web Search action group using SerpApi), you must configure them securely using AWS Secrets Manager **before** deploying the CDK infrastructure.
 
-1.  **Choose a Secret Name:** For this example, we will use `BedrockAgentSerpApiKey` for the SerpApi key.
-2.  **Create the Secret in AWS Secrets Manager:**
-    Replace `YOUR_ACTUAL_SERPAPI_KEY_VALUE` with your real SerpApi key and ensure you are in the correct AWS region where your Bedrock resources will be deployed.
+1.  **Get a SerpApi Key:**
+    
+    **Option A: Sign up for SerpApi (Recommended for full functionality)**
+    - Go to [https://serpapi.com/](https://serpapi.com/)
+    - Click "Sign Up" and create a free account
+    - After signup, go to your [Dashboard](https://serpapi.com/dashboard)
+    - Copy your API key from the dashboard
+    
+    **Option B: Use a placeholder key (for testing without web search)**
+    - Use any string as a placeholder (web search won't work but deployment will succeed)
+
+2.  **Choose a Secret Name:** For this example, we will use `BedrockAgentSerpApiKey` for the SerpApi key.
+
+3.  **Check if Secret Already Exists (Optional):**
     ```bash
-    aws secretsmanager create-secret --name BedrockAgentSerpApiKey --description "SerpApi API key for Bedrock Agent web search" --secret-string "YOUR_ACTUAL_SERPAPI_KEY_VALUE"
+    aws secretsmanager describe-secret --secret-id BedrockAgentSerpApiKey --region <YOUR_REGION> --profile <YOUR_PROFILE> 2>/dev/null && echo "Secret exists" || echo "Secret not found"
     ```
+
+4.  **Create the Secret in AWS Secrets Manager:**
+    Replace `YOUR_ACTUAL_SERPAPI_KEY_VALUE` with your real SerpApi key from step 1.
+    ```bash
+    aws secretsmanager create-secret --name BedrockAgentSerpApiKey --description "SerpApi API key for Bedrock Agent web search" --secret-string "YOUR_ACTUAL_SERPAPI_KEY_VALUE" --region <YOUR_REGION> --profile <YOUR_PROFILE>
+    ```
+    Replace `<YOUR_REGION>` with your deployment region (e.g., `us-east-1`, `us-west-2`) and `<YOUR_PROFILE>` with your AWS profile name if using profiles.
+    
     *   Verify the secret is created successfully in the AWS Secrets Manager console for your target region.
     *   The CDK stack is configured to grant the Web Search Lambda function permission to read this specific secret (when the chatbot or all use cases are deployed).
 
@@ -124,12 +161,13 @@ If your agent requires external API keys (like the Web Search action group using
       1. Ensure you're using the correct model ID for your region. By default, the workshop uses the `us-west-2` region.
 
       2. Locate the file where the model ID is defined: 
-         - For the Chatbot: `packages/cdk_infra/src/stacks/bedrock-agent-stacks.ts`
+         - For the Chatbot: `packages/cdk_infra/src/stacks/bedrock-agents-stacks.ts`
          - For Text2SQL: `packages/cdk_infra/src/stacks/bedrock-text2sql-agent-stacks.ts`
 
-      3. Check the model ARN in your code. For example, the default Claude 3.5 Sonnet V2 model ARN for `us-west-2` is:
+      3. Check the model ARN in your code. For example, the default Claude Sonnet 4 model ARN for `us-west-2` is:
            ```typescript
-           "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0"
+           us.anthropic.claude-sonnet-4-20250514-v1:0
+           <!-- "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0" -->
            ``` 
       4. If you're deploying to a different region, update the ARN accordingly in the appropriate file based on your deployment case.
 
@@ -137,7 +175,7 @@ If your agent requires external API keys (like the Web Search action group using
          ```typescript
            "bedrock.BedrockFoundationModel"
            ``` 
-      > Note: We recommend to use bedrock.BedrockFoundationModel.ANTHROPIC_CLAUDE_3_5_SONNET_V2_0 . Make sure the chosen model is available in your selected region. 
+      > Note: We recommend to use bedrock.BedrockFoundationModel.ANTHROPIC_CLAUDE_SONNET_4_V1_0. Make sure the chosen model is available in your selected region. 
 
 3. Deploy the infrastructure stack (`cdk_infra`)
 
@@ -156,11 +194,44 @@ If your agent requires external API keys (like the Web Search action group using
 
 ### Synchronization Process
 
+**Option A: Using AWS Console**
+
 1. Open [Amazon Bedrock Console](https://console.aws.amazon.com/bedrock)
 2. Navigate to **Knowledge bases**
-3. Select `KBBedrockAgenowledgeBase`
+3. Select the deployed Knowledge Base (name starts with `KBBinbash`)
 4. Click on the **Amazon S3 Data source**
 5. Choose **Sync** to convert raw data into vector embeddings
+
+**Option B: Using AWS CLI**
+
+1. Find your Knowledge Base and Data Source IDs:
+   ```bash
+   # List Knowledge Bases to find the KB ID
+   aws bedrock-agent list-knowledge-bases --region <YOUR_REGION> --profile <YOUR_PROFILE>
+
+   # List Data Sources using the KB ID from above
+   aws bedrock-agent list-data-sources --knowledge-base-id <KB_ID> --region <YOUR_REGION> --profile <YOUR_PROFILE>
+   ```
+
+2. Start the synchronization:
+   ```bash
+   aws bedrock-agent start-ingestion-job \
+     --knowledge-base-id <KB_ID> \
+     --data-source-id <DATA_SOURCE_ID> \
+     --region <YOUR_REGION> \
+     --profile <YOUR_PROFILE>
+   ```
+
+3. Check synchronization status (optional):
+   ```bash
+   aws bedrock-agent get-ingestion-job \
+     --knowledge-base-id <KB_ID> \
+     --data-source-id <DATA_SOURCE_ID> \
+     --ingestion-job-id <JOB_ID> \
+     --region <YOUR_REGION> \
+     --profile <YOUR_PROFILE>
+   ```
+   Look for `"status": "COMPLETE"` to confirm synchronization finished successfully.
 
 > Important: Without synchronization, the Bedrock Agent cannot interact with the knowledge base. This step is crucial for enabling agent functionality.
 

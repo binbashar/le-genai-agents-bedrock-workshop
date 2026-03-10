@@ -69,6 +69,7 @@ describe("CDK Stack Configurations", () => {
             AGENT_ALIAS: bedrockAgentsStack.AGENT_ALIAS,
             AGENT_KB: bedrockKnowledgeBaseStack.AGENT_KB,
             PREFIX: stackNamePrefix,
+            userPool: commonStack.userPool,
           },
         );
         expect(basicRestApiStack).toBeDefined();
@@ -124,6 +125,7 @@ describe("CDK Stack Configurations", () => {
           AGENT_ALIAS: bedrockText2SqlAgentsStack.AGENT_ALIAS,
           AGENT_KB: null,
           PREFIX: stackNamePrefix,
+          userPool: commonStack.userPool,
         },
       );
       expect(basicRestApiStack).toBeDefined();
@@ -187,6 +189,7 @@ describe("CDK Stack Configurations", () => {
           AGENT_ALIAS: bedrockText2SqlAgentsStack.AGENT_ALIAS,
           AGENT_KB: bedrockKnowledgeBaseStack.AGENT_KB,
           PREFIX: stackNamePrefix,
+          userPool: commonStack.userPool,
         },
       );
       expect(basicRestApiStack).toBeDefined();

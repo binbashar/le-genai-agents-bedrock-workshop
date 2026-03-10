@@ -154,10 +154,11 @@ A: If you're not seeing model monitoring metrics in your CloudWatch dashboard, i
 
 1. Ensure you're using the correct model ID for your region. By default, the workshop uses the `us-west-2` region.
 
-2. Check the model ARN in your code. For example, the default Claude 3 Sonnet model ARN for `us-west-2` is:
+2. Check the model ARN in your code. For example, the default Claude 4 Sonnet model ARN for `us-west-2` is:
 
    ```typescript
-   "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0"
+   "us.anthropic.claude-sonnet-4-20250514-v1:0"
+   <!-- "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0" -->
    ```
    If you're deploying to a different region, make sure to update the region in the ARN accordingly.
 

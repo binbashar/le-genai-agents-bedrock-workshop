@@ -16,8 +16,6 @@ import {
 } from "@cdklabs/generative-ai-cdk-constructs";
 import {
   AgentActionGroup,
-  PromptCreationMode,
-  PromptState,
 } from "@cdklabs/generative-ai-cdk-constructs/lib/cdk-lib/bedrock";
 import { Stack, StackProps, Duration } from "aws-cdk-lib";
 import * as iam from "aws-cdk-lib/aws-iam";
@@ -29,7 +27,7 @@ import { NagSuppressions } from "cdk-nag";
 import { Construct } from "constructs";
 
 interface BedrockText2SqlAgentsStackProps extends StackProps {
-  AGENT_KB: bedrock.KnowledgeBase | null;
+  AGENT_KB: bedrock.VectorKnowledgeBase | null;
   LAYER_BOTO: PythonLayerVersion;
   LAYER_POWERTOOLS: PythonLayerVersion;
   LAYER_PYDANTIC: PythonLayerVersion;
@@ -163,14 +161,12 @@ export class BedrockText2SqlAgentsStack extends Stack {
         openApiPath: string;
       },
     ): AgentActionGroup {
-      return new AgentActionGroup(parentScope, agentId, {
-        actionGroupName: agentProps.actionGroupName,
+      return new AgentActionGroup({
+        name: agentProps.actionGroupName,
         description: agentProps.description,
-        actionGroupExecutor: {
-          lambda: agentProps.lambda,
-        },
-        actionGroupState: "ENABLED",
-        apiSchema: bedrock.ApiSchema.fromAsset(
+        executor: bedrock.ActionGroupExecutor.fromlambdaFunction(agentProps.lambda),
+        enabled: true,
+        apiSchema: bedrock.ApiSchema.fromLocalAsset(
           // openapi.json schema must be defined and stored under the path
           path.join(
             __dirname,
@@ -190,19 +186,27 @@ export class BedrockText2SqlAgentsStack extends Stack {
     const orchestration = readFileSync(
       path.join(
         __dirname,
-        "../../prompt/orchestration/text2sql/claude/sonnet3.5", // Using Claude Sonnet 3.5 prompt
+        "../../prompt/orchestration/text2sql/claude/sonnet4", // Using Claude Sonnet 4 prompt
         "orchestration_prompt.txt",
       ),
       "utf8",
     );
 
+    // * Define Claude Sonnet 4 model with regional inference profile
+    const CLAUDE_SONNET_4 = new bedrock.BedrockFoundationModel(
+      'us.anthropic.claude-sonnet-4-20250514-v1:0',
+      {
+        supportsAgents: true,
+        supportsCrossRegion: true,
+        optimizedForAgents: true
+      }
+    );
+
     // Create Bedrock Agent
     const bedrockAgent = new bedrock.Agent(this, "AthenaAgent", {
       name: (cdk.Stack.of(this) + "-" + "AthenaAgent").replace("/", "-"),
-      foundationModel:
-        bedrock.BedrockFoundationModel.ANTHROPIC_CLAUDE_3_5_SONNET_V2_0,
+      foundationModel: CLAUDE_SONNET_4,
       shouldPrepareAgent: true,
-      enableUserInput: true,
       instruction:
         "You are " +
         this.node.tryGetContext("custom:agentName") +
@@ -211,24 +215,19 @@ export class BedrockText2SqlAgentsStack extends Stack {
         ". If Human says Hello, Great the human with your name." +
         "\n" +
         instruction,
-      promptOverrideConfiguration: {
-        promptConfigurations: [
-          {
-            promptType: bedrock.PromptType.ORCHESTRATION,
-            parserMode: bedrock.ParserMode.DEFAULT,
-            inferenceConfiguration: {
-              temperature: 0,
-              topP: 1,
-              topK: 250,
-              maximumLength: 2048,
-              stopSequences: ["</invoke>", "</error>", "</answer>"],
-            },
-            basePromptTemplate: orchestration,
-            promptCreationMode: PromptCreationMode.OVERRIDDEN,
-            promptState: PromptState.ENABLED,
+      promptOverrideConfiguration: bedrock.PromptOverrideConfiguration.fromSteps([
+        {
+          stepType: bedrock.AgentStepType.ORCHESTRATION,
+          customPromptTemplate: orchestration,
+          inferenceConfig: {
+            temperature: 0,
+            topP: 1,
+            topK: 250,
+            maximumLength: 2048,
+            stopSequences: ["</invoke>", "</error>", "</answer>"],
           },
-        ],
-      },
+        },
+      ]),
     });
     this.AGENT = bedrockAgent;
 
@@ -342,7 +341,7 @@ export class BedrockText2SqlAgentsStack extends Stack {
 
     // Create Bedrock Agent Alias
     const athenaAgentAlias = new bedrock.AgentAlias(this, "AthenaAgentAlias", {
-      agentId: bedrockAgent.agentId,
+      agent: bedrockAgent,
       aliasName: "latest",
     });
     this.AGENT_ALIAS = athenaAgentAlias.aliasId;
@@ -361,13 +360,13 @@ export class BedrockText2SqlAgentsStack extends Stack {
 
     // provides monitoring for a specific model with on-demand pricing calculation
     // pricing details are available here: https://aws.amazon.com/bedrock/pricing/
+    // Claude Sonnet 4 pricing: $3/$15 per million tokens (input/output)
     bddashboard.addModelMonitoring(
-      "Claude Sonnet 3.5 v2",
-      // Claude Sonnet 3.5 ARN (us-west-2) - Update region in ARN if necessary
-      "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0",
+      "Claude Sonnet 4",
+      "anthropic.claude-sonnet-4-20250514-v1:0",
       {
-        inputTokenPrice: 0.003, // On-demand Price per 1K input tokens
-        outputTokenPrice: 0.015, // Price per 1K output tokens
+        inputTokenPrice: 0.003, // $3 per 1M input tokens = $0.003 per 1K
+        outputTokenPrice: 0.015, // $15 per 1M output tokens = $0.015 per 1K
       },
     );
 

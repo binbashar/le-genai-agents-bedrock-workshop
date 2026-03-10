@@ -1,56 +1,52 @@
 {
-    "openapi": "3.0.1",
+    "openapi": "3.0.0",
     "info": {
-        "title": "AccountActions API",
-        "description": "API for handling account-related actions",
+        "title": "Powertools API",
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "/"
+        }
+    ],
     "paths": {
         "/escalate": {
             "post": {
-                "operationId": "escalate",
-                "description": "Used to escalate to live agent",
-                "requestBody": {
-                    "description": "Escalation request details",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "description": "Email address to look up"
-                                    }
-                                },
-                                "required": ["email"]
-                            }
-                        }
+                "summary": "POST /escalate",
+                "description": "used to escalate to live agent",
+                "operationId": "escalate_escalate_post",
+                "parameters": [
+                    {
+                        "description": "Email address to look up",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Email",
+                            "description": "Email address to look up"
+                        },
+                        "name": "email",
+                        "in": "query"
                     }
-                },
+                ],
                 "responses": {
-                    "200": {
-                        "description": "Successful response",
+                    "422": {
+                        "description": "Validation Error",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "boolean",
-                                    "description": "Response indicating success or failure"
+                                    "$ref": "#/components/schemas/HTTPValidationError"
                                 }
                             }
                         }
                     },
-                    "default": {
-                        "description": "Error response",
+                    "200": {
+                        "description": "Successful Response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "type": "boolean",
+                                    "title": "Return",
+                                    "description": "Response only True/False"
                                 }
                             }
                         }
@@ -60,58 +56,116 @@
         },
         "/password_change": {
             "post": {
-                "operationId": "password_change",
-                "description": "Used for changing account password",
-                "requestBody": {
-                    "description": "Password change request details",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "email": {
-                                        "type": "string",
-                                        "description": "Email address to look up"
-                                    },
-                                    "phone": {
-                                        "type": "string",
-                                        "description": "Phone number to verify account information"
-                                    }
-                                },
-                                "required": ["email", "phone"]
-                            }
-                        }
+                "summary": "POST /password_change",
+                "description": "used for changing account password",
+                "operationId": "password_change_password_change_post",
+                "parameters": [
+                    {
+                        "description": "Email address to look up",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Email",
+                            "description": "Email address to look up"
+                        },
+                        "name": "email",
+                        "in": "query"
+                    },
+                    {
+                        "description": "Phone number to verifying account information",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Phone",
+                            "description": "Phone number to verifying account information"
+                        },
+                        "name": "phone",
+                        "in": "query"
                     }
-                },
+                ],
                 "responses": {
-                    "200": {
-                        "description": "Successful response",
+                    "422": {
+                        "description": "Validation Error",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "string",
-                                    "description": "Result of password change operation"
+                                    "$ref": "#/components/schemas/HTTPValidationError"
                                 }
                             }
                         }
                     },
-                    "default": {
-                        "description": "Error response",
+                    "200": {
+                        "description": "Successful Response",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    }
+                                    "type": "string",
+                                    "title": "Return",
+                                    "description": "change the account password after getting all the required information from user"
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            },
+            "ResponseValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "ResponseValidationError"
             }
         }
     }
