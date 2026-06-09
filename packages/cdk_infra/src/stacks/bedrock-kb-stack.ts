@@ -16,7 +16,7 @@ interface BedrockKnowledgeBaseStackProps extends StackProps {
 }
 
 export class BedrockKnowledgeBaseStack extends Stack {
-  public readonly AGENT_KB: bedrock.KnowledgeBase;
+  public readonly AGENT_KB: bedrock.VectorKnowledgeBase;
 
   constructor(
     scope: Construct,
@@ -65,7 +65,7 @@ export class BedrockKnowledgeBaseStack extends Stack {
     });
 
     // * Amazon Bedrock
-    this.AGENT_KB = new bedrock.KnowledgeBase(this, "AgentKnowledgeBase", {
+    this.AGENT_KB = new bedrock.VectorKnowledgeBase(this, "AgentKnowledgeBase", {
       embeddingsModel: bedrock.BedrockFoundationModel.TITAN_EMBED_TEXT_V2_1024,
       instruction:
         "Use this knowledge base for answering general questions related to AWS bedrock and AWS Lambda." +

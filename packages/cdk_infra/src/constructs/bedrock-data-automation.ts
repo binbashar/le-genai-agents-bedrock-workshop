@@ -16,8 +16,6 @@ import {
 } from "@cdklabs/generative-ai-cdk-constructs";
 import {
   AgentActionGroup,
-  PromptCreationMode,
-  PromptState,
 } from "@cdklabs/generative-ai-cdk-constructs/lib/cdk-lib/bedrock";
 import { Stack, StackProps, Duration } from "aws-cdk-lib";
 import * as iam from "aws-cdk-lib/aws-iam";

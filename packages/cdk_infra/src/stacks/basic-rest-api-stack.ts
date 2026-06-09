@@ -30,7 +30,7 @@ export interface BasicRestApiStackProps extends StackProps {
   // Text2SQL specific properties
   AGENT?: bedrock.Agent;
   AGENT_ALIAS?: string;
-  AGENT_KB?: bedrock.KnowledgeBase | null;
+  AGENT_KB?: bedrock.VectorKnowledgeBase | null;
   // Document Processing specific properties
   DOCUMENT_INPUT_BUCKET?: s3.Bucket;
   DOCUMENT_OUTPUT_BUCKET?: s3.Bucket;

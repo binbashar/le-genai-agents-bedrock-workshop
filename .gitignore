@@ -50,3 +50,12 @@ jspm_packages/
 cdk.out
 dist
 **/test/__snapshots__/
+
+# Local dev config
+.mcp.json
+.env
+.env.*
+!.env.example
+
+# Frontend environment-specific config
+packages/reactjs_ui/src/aws-exports.js

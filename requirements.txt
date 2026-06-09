@@ -1,2 +1,2 @@
-aws-lambda-powertools==3.4.0
-pydantic==2.10.5
+aws-lambda-powertools==3.20.0
+pydantic==2.11.7

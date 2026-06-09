@@ -271,7 +271,7 @@ This guide will help you customize the Text2SQL functionality with your own data
 
 ### 3. Update Template Files
 
-Go to the [templates folder](/packages/cdk_infra/src/prompt/orchestration/text2sql/claude/sonnet3.5/templates/) and update:
+Go to the [templates folder](/packages/cdk_infra/src/prompt/orchestration/text2sql/claude/sonnet4/templates/) and update:
 
 1. `tables.txt`: List tables with comprehensive comments
 2. `schema.txt`: Add detailed comments for each column
